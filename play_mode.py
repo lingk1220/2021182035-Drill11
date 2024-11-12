@@ -40,13 +40,14 @@ def init():
     #충돌 대상 등록
 
     add_collision_pair('boy:ball', boy, None)
+    add_collision_pair('boy:zombie', boy, None)
 
     for ball in balls:
         add_collision_pair('boy:ball', None, ball)
 
     for zombie in zombies:
-        add_collision_pair('ball:zombie', zombie, None)
-
+        add_collision_pair('ball:zombie', None, zombie)
+        add_collision_pair('boy:zombie', None, zombie)
 
 
 def finish():

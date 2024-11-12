@@ -45,8 +45,12 @@ class Zombie:
         self.x = clamp(800, self.x, 1600)
         pass
 
+    def get_bb(self):
+        return self.x - 50 * self.hp, self.y - 50 * self.hp, self.x + 50 * self.hp, self.y + 50 * self.hp
+        pass
 
     def draw(self):
+
         if self.hp == 2:
             if self.dir < 0:
                 Zombie.images['Walk'][int(self.frame)].composite_draw(0, 'h', self.x, self.y, 200, 200)
@@ -58,13 +62,17 @@ class Zombie:
             else:
                 Zombie.images['Walk'][int(self.frame)].draw(self.x, self.y, 100, 100)
 
+        draw_rectangle(*self.get_bb())
+
     def handle_event(self, event):
         pass
 
 
     def handle_collision(self, group, other):
+        print('ab')
         if group == 'ball:zombie':
             self.hp -= 1
+            self.y -= 50
             if self.hp == 0:
                 game_world.remove_object(self)
         pass
